@@ -10,7 +10,9 @@ namespace dip
     {
     public:
         pgm() : matrix() {};
-        ~pgm() {};
+        ~pgm() {}
+
+    public:
         pgm& load(std::string);
     };
 }

@@ -3,18 +3,6 @@
 
 using namespace dip;
 
-void matrix::init(unsigned int width, unsigned int height)
-{
-    head = new intensity *[height];
-    for (int i = 0; i < height; ++i)
-    {
-        head[i] = new intensity[width];
-    }
-
-    i_width = width;
-    i_height = height;
-}
-
 matrix::matrix(unsigned int width, unsigned int height)
 {
     init(width, height);
@@ -28,6 +16,18 @@ matrix::~matrix()
     }
 
     delete[] head;
+}
+
+void matrix::init(unsigned int width, unsigned int height)
+{
+    head = new intensity *[height];
+    for (int i = 0; i < height; ++i)
+    {
+        head[i] = new intensity[width];
+    }
+
+    i_width = width;
+    i_height = height;
 }
 
 matrix::intensity* matrix::operator[](int index)

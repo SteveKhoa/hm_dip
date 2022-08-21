@@ -7,11 +7,12 @@ using namespace dip;
 
 int main()
 {
-    pgm im;
-    im.load("sample.pgm");
+        pgm im;
+        im.load("sample.pgm");
+        
+        im.at(3, 1) = 256;
+        
+        im.print();
 
-    im.at(3, 1) = 256;
-
-    im.print();
     return 0;
 }
