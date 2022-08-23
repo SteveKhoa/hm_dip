@@ -2,6 +2,12 @@
 
 *For personal educational purpose.*
 
-Homemade Image Processing Library for .pgm format.
+Homemade Image Processing Library with a help of Linear Algebra!
 
-To start using, take a look at the examples in example.cpp
+Notes
+---
+ready.cpp is a 'ready to use' file, intended for personal testing and examples. This file could be used directly as an example of this library.
+
+Features
+---
+*Not yet*
