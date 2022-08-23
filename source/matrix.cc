@@ -30,11 +30,6 @@ void matrix::init(unsigned int width, unsigned int height)
     i_height = height;
 }
 
-matrix::intensity* matrix::operator[](int index)
-{
-    return head[index];
-}
-
 matrix::intensity& matrix::at(int x, int y)
 {
     return head[x][y];
@@ -50,6 +45,7 @@ unsigned int matrix::height()
     return this->i_height;
 }
 
+// This method is for testing only.
 void matrix::print()
 {
     std::cout << "\n";

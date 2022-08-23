@@ -1,4 +1,4 @@
-#include "../include/pgm.h"
+#include "../include/image.h"
 #include <fstream>
 #include <iostream>
 
@@ -6,15 +6,18 @@ using namespace dip;
 
 pgm &pgm::load(std::string file_dir)
 {
+    // Check input file name extension.
     std::string name_extentsion = file_dir.substr(file_dir.length() - 4);
     if (name_extentsion != ".pgm")
     {
         throw std::runtime_error("Input image must be: .pgm");
     }
 
+    // Create file stream
     std::ifstream text_im;
 
     text_im.open(file_dir);
+
     if (!text_im.is_open())
     {
         throw std::runtime_error("Input image not found.");
@@ -22,6 +25,7 @@ pgm &pgm::load(std::string file_dir)
 
     std::string element;
 
+    // Parser, parse through the input file
     unsigned int cnt = 0;
     unsigned int curr_w = 0;
     unsigned int curr_h = 0;

@@ -1,8 +1,8 @@
 default:
 	clang++ \
-		*.cc \
-		test.cpp \
+		source/*.cc \
+		ready.cpp \
 	-o \
-		test 
+		ready
 
-	./test
+	./ready

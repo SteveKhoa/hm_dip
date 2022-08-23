@@ -19,7 +19,6 @@ namespace dip
             : head(0), i_width(0), i_height(0) {}
         matrix(unsigned int width, unsigned int height);
         ~matrix();
-        intensity *operator[](int);
         intensity &at(int, int);
 
         unsigned int width();

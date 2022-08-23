@@ -1,4 +1,4 @@
-#include "pgm.h"
+#include "include/image.h"
 #include <iostream>
 
 // https://en.wikipedia.org/wiki/Netpbm
