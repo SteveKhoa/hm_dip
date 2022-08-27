@@ -15,11 +15,10 @@ namespace dip
         void init(unsigned int, unsigned int);
 
     public:
-        matrix()
-            : head(0), i_width(0), i_height(0) {}
+        matrix() : head(0), i_width(0), i_height(0) {}
         matrix(unsigned int width, unsigned int height);
         ~matrix();
-        intensity &at(int, int);
+        intensity &at(int x, int y);
 
         unsigned int width();
         unsigned int height();

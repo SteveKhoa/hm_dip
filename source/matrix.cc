@@ -18,7 +18,7 @@ matrix::~matrix()
     delete[] head;
 }
 
-void matrix::init(unsigned int width, unsigned int height)
+void matrix::init(unsigned int height, unsigned int width)
 {
     head = new intensity *[height];
     for (int i = 0; i < height; ++i)

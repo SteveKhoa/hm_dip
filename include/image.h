@@ -12,13 +12,17 @@ namespace dip
 
     class pgm : public matrix
     {
+        unsigned int color_depth; // color depth is a fixed integer number (from input image)
     public:
-        pgm() 
-            : matrix() {}
+        pgm() : matrix() {}
         ~pgm() {}
 
     public:
-        pgm& load(std::string);
+        pgm& load(std::string file_dir);
+        void write(std::string export_dir);
+    public:
+        unsigned int ColorDepth();
+        void setColorDepth(unsigned int new_value);
     };
 
     // not finish

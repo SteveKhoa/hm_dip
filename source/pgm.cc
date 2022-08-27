@@ -1,6 +1,7 @@
 #include "../include/image.h"
 #include <fstream>
 #include <iostream>
+#include <math.h>
 
 using namespace dip;
 
@@ -14,61 +15,88 @@ pgm &pgm::load(std::string file_dir)
     }
 
     // Create file stream
-    std::ifstream text_im;
+    std::ifstream in_ImFile;
 
-    text_im.open(file_dir);
+    in_ImFile.open(file_dir);
 
-    if (!text_im.is_open())
+    if (!in_ImFile.is_open())
     {
         throw std::runtime_error("Input image not found.");
     }
 
-    std::string element;
-
     // Parser, parse through the input file
-    unsigned int cnt = 0;
-    unsigned int curr_w = 0;
-    unsigned int curr_h = 0;
+    std::string token;  // current token
+    std::string ltoken; // last token
 
-    while (text_im.peek() != EOF)
+    for (int cnt = 0; in_ImFile.peek() != EOF; ++cnt)
     {
-        text_im >> element;
-        cnt += 1;
+        in_ImFile >> token;
 
-        switch (cnt)
+        if (cnt == 2)
         {
-        case 1:
-            continue;
-        case 2:
-        {
-            curr_w = std::stoi(element);
-            break;
+            /**
+             * @brief Initialize image matrix when cnt == 2 (got width and height)
+             *
+             * @param ltoken = width
+             * @param token = height
+             */
+            this->init(std::stoi(token), std::stoi(ltoken));
         }
+        else if (cnt == 3)
+        {
+            this->color_depth = std::stoi(token);
+        }
+        else if (cnt > 3)
+        {
+            const unsigned int& curr_w =  (cnt - 4) % this->width();
+            const unsigned int& curr_h = floor((cnt - 4) / this->width());
+            this->at(curr_h, curr_w) = std::stoi(token);
+        }
+        ltoken = token;
+    }
 
-        case 3:
-        {
-            curr_h = std::stoi(element);
-            break;
-        }
+    in_ImFile.close();
 
-        case 4:
-        {
-            this->init(curr_w, curr_h);
-            curr_w = curr_h = 0;
-            break;
-        }
-        default:
-        {
-            if (curr_w % this->width() == 0)
-                curr_h += 1;
+    return *this;
+}
 
-            this->at(curr_w % this->width(), curr_h) = std::stod(element);
-            break;
-        }
+void pgm::write(std::string export_dir)
+{
+    std::ofstream exportFile;
+
+    exportFile.open(export_dir);
+
+    if (!exportFile.is_open())
+    {
+        throw std::runtime_error("Could not export with given export directory.");
+    }
+
+    exportFile << "P2" // "P2" : pgm format
+               << " " << this->width() << " " << this->height() << " "
+               << color_depth << std::endl;
+    for (int i = 0; i < this->height(); ++i)
+    {
+        if (i > 0)
+            exportFile << std::endl;
+
+        for (int j = 0; j < this->width(); ++j)
+        {
+            if (j > 0)
+                exportFile << " ";
+
+            exportFile << this->at(i, j);
         }
     }
 
-    text_im.close();
+    exportFile.close();
+}
 
-    return *this;
+unsigned int pgm::ColorDepth()
+{
+    return color_depth;
+}
+
+void pgm::setColorDepth(unsigned int new_value)
+{
+    color_depth = new_value;
 }

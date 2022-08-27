@@ -21,9 +21,15 @@ int main()
         pgm im;
         im.load("sample.pgm");
         
-        im.at(3, 1) = 256;
+        im.at(3, 1) = 5;
+        im.at(5, 1) = 5;
+        im.at(1, 7) = 5;
+        im.at(1, 9) = 5;
+        im.at(1, 13) = 15;
+
+        im.write("out.pgm");
         
-        im.print();
+        // im.print();
 
     return 0;
 }

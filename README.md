@@ -1,6 +1,6 @@
 # Homemade Image Processing Library
 
-*For personal educational purpose.*
+*For personal purpose.*
 
 Homemade Image Processing Library with a help of Linear Algebra!
 
