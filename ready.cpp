@@ -8,6 +8,9 @@
 //  Rotate image by 45, 90 or alpha degree
 //  Pixel averaging: Loop for every 3x3 block, replace all its pixels with their average
 
+// Really good practice materials:
+// https://www.usna.edu/Users/cs/wcbrown/courses/F14IC210/lab/l09/lab.html
+
 // JPEG
 //  Take a look at JPEG TAKEAWAY.pptx
 
@@ -19,17 +22,11 @@ using namespace dip;
 int main()
 {
         pgm im;
-        im.load("sample.pgm");
-        
-        im.at(3, 1) = 5;
-        im.at(5, 1) = 5;
-        im.at(1, 7) = 5;
-        im.at(1, 9) = 5;
-        im.at(1, 13) = 15;
+        im.load("dog.pgm");
+
+        im.setColorDepth(100);
 
         im.write("out.pgm");
-        
-        // im.print();
 
     return 0;
 }

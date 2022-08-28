@@ -2,11 +2,11 @@
 
 *For personal purpose.*
 
-Homemade Image Processing Library with a help of Linear Algebra!
+I do this little project as a practice for my Image Processing study. This library is not practical nor efficient for any real-life usage. However, I hope this could be a dev log for myself and for anyone who are interested in Image Processing at Beginner's level.
 
 Notes
 ---
-ready.cpp is a 'ready to use' file, intended for personal testing and examples. This file could be used directly as an example of this library.
+ready.cpp is a 'ready to use' file, intended for quick testing and examples. This file already includes all necessary headers and could be used directly.
 
 Features
 ---

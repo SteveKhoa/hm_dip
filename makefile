@@ -1,6 +1,6 @@
 .SILENT:
 default:
-	clang++ source/*.cc ready.cpp -o ready
+	clang++ -std=c++11 source/*.cc ready.cpp -o ready
 	./ready
 
 op:

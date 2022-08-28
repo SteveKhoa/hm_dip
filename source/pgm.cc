@@ -48,9 +48,11 @@ pgm &pgm::load(std::string file_dir)
         }
         else if (cnt > 3)
         {
-            const unsigned int& curr_w =  (cnt - 4) % this->width();
             const unsigned int& curr_h = floor((cnt - 4) / this->width());
-            this->at(curr_h, curr_w) = std::stoi(token);
+            const unsigned int& curr_w =  (cnt - 4) % this->width();
+            
+            if (curr_w < this->width() && curr_h < this->height())
+                this->at(curr_h, curr_w) = std::stoi(token);
         }
         ltoken = token;
     }
@@ -99,4 +101,9 @@ unsigned int pgm::ColorDepth()
 void pgm::setColorDepth(unsigned int new_value)
 {
     color_depth = new_value;
+}
+
+pgm& pgm::rotate(double rad)
+{
+    pgm newImg      
 }

@@ -3,9 +3,9 @@
 
 using namespace dip;
 
-matrix::matrix(unsigned int width, unsigned int height)
+matrix::matrix(unsigned int height, unsigned int width)
 {
-    init(width, height);
+    init(height, width);
 }
 
 matrix::~matrix()
@@ -30,9 +30,11 @@ void matrix::init(unsigned int height, unsigned int width)
     i_height = height;
 }
 
-matrix::intensity& matrix::at(int x, int y)
+matrix::intensity& matrix::at(int y, int x)
 {
-    return head[x][y];
+    if (x >= i_width || y >= i_height)
+        throw std::runtime_error("Out of bound Access on Matrix.");
+    return head[y][x];
 }
 
 unsigned int matrix::width()
