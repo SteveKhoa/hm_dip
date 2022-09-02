@@ -8,8 +8,8 @@ namespace dip
     class matrix
     {
         typedef double intensity;
-        intensity **head;
 
+        intensity **head;
         unsigned int i_width;
         unsigned int i_height;
 
@@ -25,12 +25,14 @@ namespace dip
         intensity &at(int y, int x);
 
     public: // Object's getter
-        unsigned int width();
-        unsigned int height();
+        unsigned int width() const;
+        unsigned int height() const;
 
     public: // Miscellaneous (Misc)
-        void print();
-
+        void print() const;
+        void forall(const std::function<void(intensity &_ENTRY_ALIAS_)> &f);
+        void clear();
+        virtual matrix& copy(const matrix& target);
     };
 }
 

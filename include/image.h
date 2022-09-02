@@ -3,6 +3,7 @@
 
 #include "matrix.h"
 #include <string>
+#include <iostream>
 
 /**
  * @brief Image classes: pbm, pgm, ppm are *derived class* from base *matrix class*
@@ -26,11 +27,12 @@ namespace dip
     public: // Image iostream
         pgm& load(std::string file_dir);
         void write(std::string export_dir);
+        pgm& copy(pgm& target);
     public: // Intensity manipulation
-        unsigned int ColorDepth();
+        unsigned int ColorDepth() const;
         void setColorDepth(unsigned int new_value);
     public: // ... processing
-        pgm& rotate(double rad);
+        pgm& rotate(double degree);
     };
 
     // not finish

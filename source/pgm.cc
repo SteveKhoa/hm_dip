@@ -48,9 +48,9 @@ pgm &pgm::load(std::string file_dir)
         }
         else if (cnt > 3)
         {
-            const unsigned int& curr_h = floor((cnt - 4) / this->width());
-            const unsigned int& curr_w =  (cnt - 4) % this->width();
-            
+            const unsigned int &curr_h = floor((cnt - 4) / this->width());
+            const unsigned int &curr_w = (cnt - 4) % this->width();
+
             if (curr_w < this->width() && curr_h < this->height())
                 this->at(curr_h, curr_w) = std::stoi(token);
         }
@@ -64,6 +64,12 @@ pgm &pgm::load(std::string file_dir)
 
 void pgm::write(std::string export_dir)
 {
+    if (this->width() == 0 || this->height() == 0)
+    {
+        std::cout << "DIP: Can not write from empty matrix.\n";
+        return;
+    }
+
     std::ofstream exportFile;
 
     exportFile.open(export_dir);
@@ -93,7 +99,7 @@ void pgm::write(std::string export_dir)
     exportFile.close();
 }
 
-unsigned int pgm::ColorDepth()
+unsigned int pgm::ColorDepth() const
 {
     return color_depth;
 }
@@ -103,7 +109,56 @@ void pgm::setColorDepth(unsigned int new_value)
     color_depth = new_value;
 }
 
-pgm& pgm::rotate(double rad)
+pgm &pgm::copy(pgm &target)
 {
-    pgm newImg      
+    this->clear();
+    init(target.height(), target.width());
+    this->color_depth = target.ColorDepth();
+
+    for (int y = 0; y < this->height(); ++y)
+    {
+        for (int x = 0; x < this->width(); ++x)
+        {
+            double clone_pix = target.at(y, x);
+            this->at(y, x) = clone_pix;
+        }
+    }
+
+    return *this;
+}
+
+pgm &pgm::rotate(double degree)
+{
+    // Tons of problems arose with this rotation
+    // to fix this, explore:
+    // And read the thesis:
+    // Rotations in 2D and 3D discrete spaces
+
+    double rad = (degree / 180.0) * 3.14156;
+    pgm new_im(this->height(), this->width());
+    new_im.color_depth = this->ColorDepth();
+
+    int center_x = this->width() / 2;
+    int center_y = this->height() / 2;
+
+    for (int y = 0; y < this->height(); ++y)
+    {
+        for (int x = 0; x < this->width(); ++x)
+        {
+            // linear algebra things
+            int new_x = floor((x - center_x) * cos(rad) - (y - center_y) * sin(rad)) + center_x;
+            int new_y = floor((x - center_x) * sin(rad) + (y - center_y) * cos(rad)) + center_y;
+
+            if (new_x < width() && new_y < height())
+            {
+                double clone_numb = this->at(y, x);
+                new_im.at(new_y, new_x) = clone_numb;
+            }
+        }
+    }
+
+    this->clear();
+    this->copy(new_im);
+
+    return *this;
 }

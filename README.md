@@ -11,3 +11,7 @@ ready.cpp is a 'ready to use' file, intended for quick testing and examples. Thi
 Features
 ---
 *Not yet*
+
+Bugs
+---
+The *rotation* operation produces a *weird* transformation, many pixels are lost during the transformation, result in a noisy image.
