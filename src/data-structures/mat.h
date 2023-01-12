@@ -1,3 +1,6 @@
+#ifndef DIP_DS_MAT
+#define DIP_DS_MAT
+
 #include <iostream>
 
 // 2-d matrix - mat
@@ -20,12 +23,7 @@ public:
     }
 
 public:
-    dtype& at(unsigned int i, unsigned int j)
-    {
-        if (i < 0 || j < 0 || i >= height || j >= width)
-            std::cout << "dip: invalid index\n";
-        return head[width*i + j];
-    }
+    dtype& mat<dtype>::at(unsigned int i, unsigned int j);
 
 public:
     ~mat() 
@@ -33,3 +31,5 @@ public:
         delete[] head;
     }
 };
+
+#endif

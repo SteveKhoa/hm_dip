@@ -14,6 +14,7 @@ int main()
 {
     mat<int> arr = {10, 20};
 
+    arr.at(2, 3) = 17;
     cout << arr.at(2, 3);
     return 0;
 }
